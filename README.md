@@ -61,12 +61,14 @@ workflows:
       - run-braintrust-evals:
           context:
             - ai-llm-evals-orb-examples # Replace this with your context name
+            - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
   langsmith-evals:
     when: << pipeline.parameters.run-langsmith-evals >>
     jobs:
       - run-langsmith-evals:
           context:
             - ai-llm-evals-orb-examples # Replace this with your context name
+            - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
 ```
 
 ### Step 3. Select an evaluation platform
