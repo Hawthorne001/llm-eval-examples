@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   evals: circleci/evals@1.0
-  slack: circleci/slack@4.13.2
+  slack: circleci/slack@4.13.3
 
 # PIPELINE PARAMETERS
 parameters:
@@ -10,6 +10,9 @@ parameters:
     type: boolean
     default: false
   run-langsmith-evals:
+    type: boolean
+    default: false
+  run-custom-evals:
     type: boolean
     default: false
 
@@ -45,6 +48,13 @@ workflows:
           context:
             - ai-llm-eval-examples # Replace this with your context name
             - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
+  custom-evals:
+    when: << pipeline.parameters.run-custom-evals >>
+    jobs:
+      - run-custom-evals:
+          context:
+            - ai-llm-eval-examples # Replace this with your context name
+            - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
 
 # JOBS
 jobs:
@@ -76,3 +86,22 @@ jobs:
           cmd: python3 langsmith/eval.py
           eval_platform: langsmith
       - notify_fail_slack
+
+  run-custom-evals:
+    executor: python
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            pip install -r ./custom-command/requirements.txt
+      - run:
+          name: Run Tests
+          command: |
+            mkdir /tmp/test-results
+            cd ./custom-command
+            pytest --html=/tmp/test-results/report.html
+      - evals/eval:
+          circle_pipeline_id: << pipeline.id >>
+          cmd: echo "hello world"
+          evals_result_location: /tmp/test-results/report.html

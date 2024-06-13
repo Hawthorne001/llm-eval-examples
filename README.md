@@ -69,9 +69,19 @@ workflows:
           context:
             - ai-llm-evals-orb-examples # Replace this with your context name
             - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
+  custom-command-evals:
+    when: << pipeline.parameters.run-custom-command-evals >>
+    jobs:
+      - run-custom-command-evals:
+          context:
+            - ai-llm-eval-examples # Replace this with your context name
+            - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
 ```
 
 ### Step 3. Select an evaluation platform
+
+The evals orb supports running evaluations on two evaluation platforms: [Braintrust](https://www.braintrustdata.com/) and [LangSmith](https://smith.langchain.com/).
+The orb also supports running a custom evaluation command without specifying an `eval_platform`. In this case, the `eval_results_location` parameter is optional.
 
 #### Braintrust
 
@@ -137,13 +147,17 @@ The examples included in this repository use [dynamic configuration](https://cir
 .
 ├── README.md
 ├── braintrust
-│   ├── eval_tutorial.py
 │   ├── README.md
+│   ├── eval_tutorial.py
 │   └── requirements.txt
+├── custom-command
+│   ├── conftest.py
+│   ├── requirements.txt
+│   └── tests
 └── langsmith
+    ├── README.md
     ├── dataset.py
     ├── eval.py
-    ├── README.md
     └── requirements.txt
 ```
 
