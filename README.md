@@ -70,9 +70,9 @@ workflows:
             - ai-llm-evals-orb-examples # Replace this with your context name
             - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
   custom-command-evals:
-    when: << pipeline.parameters.run-custom-command-evals >>
+    when: << pipeline.parameters.run-custom-evals >>
     jobs:
-      - run-custom-command-evals:
+      - run-custom-evals:
           context:
             - ai-llm-eval-examples # Replace this with your context name
             - slack-notification-access-token # Replace this with your context name where SLACK_ACCESS_TOKEN is stored
