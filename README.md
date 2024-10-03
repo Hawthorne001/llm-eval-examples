@@ -1,6 +1,6 @@
 # LLM Eval Examples
 
-A collection of LLM eval examples using the [CircleCI Evals Orb](https://circleci.com/developer/orbs/orb/circleci/evals).
+A collection of LLM eval examples using the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8).
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ See their documentation for more details on capabilities and usage.
 
 ## Getting started
 
-Fork this repo to run evaluations on a LLM-based application using the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals).
+Fork this repo to run evaluations on a LLM-based application using the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8).
 
 This repository includes evaluations that can be run on two evaluation platforms: [Braintrust](https://www.braintrustdata.com/) and [LangSmith](https://smith.langchain.com/). Each example folder contains instructions and sample code to run evaluations.
 
@@ -103,7 +103,7 @@ The dataset contains a list of topics which we want ChatGPT to write poems about
 
 #### The Results
 
-Whichever evaluation platform you choose, as evals are run through the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals), CircleCI stores the summary of eval results as a job [artifact](https://circleci.com/docs/artifacts/).
+Whichever evaluation platform you choose, as evals are run through the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8), CircleCI stores the summary of eval results as a job [artifact](https://circleci.com/docs/artifacts/).
 
 <img style="text-align:center" width="370" alt="Screenshot 2024-04-30 at 10 19 53" src="https://github.com/CircleCI-Public/llm-eval-examples/assets/19594309/9df64653-d1b7-41c5-8830-f8d8d497bdca">
 
@@ -113,7 +113,7 @@ If a [`GITHUB_TOKEN`](#configure-the-evals-orb-to-post-eval-job-summaries-on-git
 
 ### Configure evals output location
 
-The `.circleci/run_evals_config.yml` file uses the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) to define jobs that run the evaluation code in each example folder. The orb handles setting up the evaluation environment, executing the evaluations, and collecting the results.
+The `.circleci/run_evals_config.yml` file uses the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) to define jobs that run the evaluation code in each example folder. The orb handles setting up the evaluation environment, executing the evaluations, and collecting the results.
 
 For example, the Braintrust job runs the Python script in `braintrust/eval_tutorial.py` by passing it as the `cmd` parameter. It saves the evaluation results to the location specified with `evals_result_location`.
 
@@ -121,7 +121,7 @@ Similarly, the LangSmith job runs the Python script in `langsmith/eval.py`.
 
 To change where the results of the evaluation are being saved, go to the `evals/eval` step, and add the parameter `evals_result_location`:
 
-_Note: the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) will make the directory if it does not exist._
+_Note: the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) will make the directory if it does not exist._
 
 ```yaml
 - evals/eval:
@@ -131,7 +131,7 @@ _Note: the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) w
     cmd: ...
 ```
 
-### Configure the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) to post eval job summaries on GitHub pull requests
+### Configure the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) to post eval job summaries on GitHub pull requests
 
 > [!WARNING]
 > Currently, this feature is available only to GitHub projects integrated throug OAuth. To find out which GitHub account type you have, refer to the [GitHub OAuth integration](https://circleci.com/docs/github-integration/) page of our Docs.
@@ -163,9 +163,9 @@ The examples included in this repository use [dynamic configuration](https://cir
 
 ## The CircleCI Evals Orb
 
-The [CircleCI Evals Orb](https://circleci.com/developer/orbs/orb/circleci/evals) simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
+The [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
 
-Given the volatile nature of evaluations, evaluations orchestrated by the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
+Given the volatile nature of evaluations, evaluations orchestrated by the [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
 
 Instead, a summary of the evaluation results can _optionally_ be presented:
 
@@ -174,7 +174,7 @@ Instead, a summary of the evaluation results can _optionally_ be presented:
 
 ### Orb Parameters
 
-The [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) accepts the following parameters:
+The [CircleCI Evals Orb 1.x.x](https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8) accepts the following parameters:
 
 _Some of the parameters are optional based on the eval platform being used._
 
