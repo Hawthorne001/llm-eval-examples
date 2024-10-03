@@ -15,6 +15,9 @@ parameters:
   run-langsmith-evals:
     type: boolean
     default: false
+  run-custom-evals:
+    type: boolean
+    default: false
 
 # The main purpose of this setup config is to identify which folders contain code changes,
 # letting us choose which model to retrain and redeploy
@@ -25,6 +28,7 @@ workflows:
         [
           << pipeline.parameters.run-braintrust-evals >>,
           << pipeline.parameters.run-langsmith-evals >>,
+          << pipeline.parameters.run-custom-evals >>,
         ]
     jobs:
       - path-filtering/filter:
@@ -34,6 +38,7 @@ workflows:
           mapping: |
             braintrust/.* run-braintrust-evals true
             langsmith/.* run-langsmith-evals true
+            evals/.* run-custom-evals true
           config-path: ".circleci/run_evals_config.yml"
   nightly-evals:
     when:
@@ -41,6 +46,7 @@ workflows:
         [
           << pipeline.parameters.run-braintrust-evals >>,
           << pipeline.parameters.run-langsmith-evals >>,
+          << pipeline.parameters.run-custom-evals >>,
         ]
     jobs:
       - continuation/continue:
